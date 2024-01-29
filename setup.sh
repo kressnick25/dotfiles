@@ -2,7 +2,7 @@ ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa_$(hostname)
 
 mkdir .bashrc.d
 touch .bashrc.d/alias
-alias_file="~/.bashrc.d/alias"
+alias_file="~/.bashrc.d/alias.bashrc"
 
 
 install="sudo dnf install"
