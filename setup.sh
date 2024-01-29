@@ -17,3 +17,7 @@ $install fd-find
 $install bat
 $install xclip
 echo "alias clip='xclip -selection c'" >> $alias_file
+
+# languge servers
+$install python3-pip
+pip install pyright
