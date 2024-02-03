@@ -20,3 +20,4 @@ vim.opt.undofile = true
 -- This seems like a good option
 vim.opt.clipboard = 'unnamed'
 
+vim.opt.ignorecase = true
