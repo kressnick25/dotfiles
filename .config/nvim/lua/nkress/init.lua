@@ -16,4 +16,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 require('lazy').setup('nkress/plugins')
 
-vim.cmd("colorscheme gruvbox")
+vim.opt.termguicolors = true
+vim.cmd.colorscheme 'gruvbox' -- gruvbox|evergarden|everforrest|onenord
+vim.o.background = 'dark'

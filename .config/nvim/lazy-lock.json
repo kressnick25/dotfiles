@@ -1,13 +1,17 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "0236521ea582747b58869cb72f70ccfa967d2e89" },
+  "everforest-nvim": { "branch": "main", "commit": "63ea67d948ddbc9915055a815ca0686930dc73d5" },
+  "evergarden": { "branch": "mega", "commit": "463d2192c3943b9ecdeee9dba7902614f0812407" },
   "gitsigns.nvim": { "branch": "main", "commit": "2c2463dbd82eddd7dbab881c3a62cfbfbe3c67ae" },
   "gruvbox.nvim": { "branch": "main", "commit": "4176b0b720db0c90ab4030e5c1b4893faf41fd51" },
   "lazy.nvim": { "branch": "main", "commit": "aedcd79811d491b60d0a6577a9c1701063c2a609" },
+  "melange-nvim": { "branch": "master", "commit": "258e5afa978aa886e7ac346612e5f920a2b6be59" },
   "nvim-autopairs": { "branch": "master", "commit": "096d0baecc34f6c5d8a6dd25851e9d5ad338209b" },
   "nvim-lspconfig": { "branch": "master", "commit": "021906284dcfb938bc236f8295af2650c60cb807" },
   "nvim-tree.lua": { "branch": "master", "commit": "f39f7b6fcd3865ac2146de4cb4045286308f2935" },
   "nvim-treesitter": { "branch": "master", "commit": "6f586875e35e2b02358efa467317634c766fd1d4" },
   "nvim-web-devicons": { "branch": "master", "commit": "aaec87dbdaa776bfa0a13c8694bec9bcb7454719" },
+  "onenord.nvim": { "branch": "main", "commit": "ad19a49d38e34a5dde8224882ac711c1310565a0" },
   "plenary.nvim": { "branch": "master", "commit": "663246936325062427597964d81d30eaa42ab1e4" },
   "telescope.nvim": { "branch": "master", "commit": "d90956833d7c27e73c621a61f20b29fdb7122709" }
 }
