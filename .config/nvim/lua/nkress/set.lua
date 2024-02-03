@@ -21,3 +21,7 @@ vim.opt.undofile = true
 vim.opt.clipboard = 'unnamed'
 
 vim.opt.ignorecase = true
+
+-- show filename for each split
+-- also display if modified
+vim.opt.winbar = '%=%m %f'
