@@ -1,7 +1,20 @@
-function configFn ()
+local mason_opts = {
+    ensure_installed = { 'lua_ls', 'pyright', 'json-lsp' }
+}
+
+local function lspConfig ()
     local lspconfig = require('lspconfig')
-    
+
     lspconfig.pyright.setup {}
+    lspconfig.lua_ls.setup {
+        settings = {
+            Lua = {
+                diagnostics = {
+                    globals = { 'vim' }
+                }
+            }
+        }
+    }
 
     vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
     vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
@@ -40,8 +53,20 @@ function configFn ()
 end
 
 return {
+    {"williamboman/mason.nvim",
+    config = function ()
+        require('mason').setup(mason_opts)
+    end
+},
+    {"williamboman/mason-lspconfig.nvim",
+    config = function ()
+        require('mason-lspconfig').setup()
+    end
+},
+{
     'neovim/nvim-lspconfig',
     event = { 'BufReadPost', 'BufNewFile' },
     cmd = { 'LspInfo', 'LspInstall', 'LspUninstall' },
-    config = configFn
+    config = lspConfig
+}
 }
