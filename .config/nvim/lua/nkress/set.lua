@@ -22,6 +22,6 @@ vim.opt.clipboard = 'unnamed'
 
 vim.opt.ignorecase = true
 
--- show filename for each split
--- also display if modified
-vim.opt.winbar = '%=%m %f'
+-- DISABLED -- handled by lualine
+-- show filename for each split, also display if modified
+--vim.opt.winbar = '%=%m %f'
