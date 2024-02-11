@@ -1,4 +1,4 @@
-function configFn ()
+local function configFn ()
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
 
@@ -6,22 +6,22 @@ function configFn ()
 
     local function my_on_attach(bufnr)
         local api = require 'nvim-tree.api'
-        vim.keymap.set('n', '<leader>tt', api.tree.toggle) 
-        vim.keymap.set('n', '<leader>tf', api.tree.focus) 
+        vim.keymap.set('n', '<leader>tt', api.tree.toggle)
+        vim.keymap.set('n', '<leader>tf', api.tree.focus)
         vim.keymap.set('n', '<leader>tb', function () api.tree.find_file({ update_root = true, open = true, focus = true }) end)
-        vim.keymap.set('n', '<leader>tc', function () api.tree.collapse_all() end) 
+        vim.keymap.set('n', '<leader>tc', function () api.tree.collapse_all() end)
     end
 
-    opts = {
+    local opts = {
         filters = {
             dotfiles = true,
             custom = { '^.git$' },
-        
         },
         hijack_cursor = true,
         hijack_unnamed_buffer_when_opening = true,
         renderer = {
-            highlight_opened_files = 'all',
+            highlight_git = 'none',
+            highlight_opened_files = 'none',
             icons = {
                 git_placement = 'signcolumn',
                 show = {
@@ -39,10 +39,9 @@ function configFn ()
     -- opts.on_attach does not seem to play nice with lazy
     -- call here directly instead
     my_on_attach()
-    
 end
 
-return { 
+return {
     'nvim-tree/nvim-tree.lua',
     dependencies = {
         -- requires a nerd font
