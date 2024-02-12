@@ -8,10 +8,17 @@ local mason_opts = {
 }
 
 local function lspConfig()
+    local cap = require("cmp_nvim_lsp").default_capabilities()
 	local lspconfig = require("lspconfig")
 
-	lspconfig.pyright.setup({})
+	lspconfig.pyright.setup({
+        capabilities = cap
+    })
+    lspconfig.tsserver.setup({
+        capabilities = cap
+    })
 	lspconfig.lua_ls.setup({
+        capabilities = cap,
 		settings = {
 			Lua = {
 				diagnostics = {
