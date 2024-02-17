@@ -2,6 +2,7 @@ local mason_opts = {
 	ensure_installed = {
 		"lua_ls",
 		"pyright",
+        "yamlls"
 	},
     -- auto install associated LSP on file open
     automatic_installation = false
@@ -27,6 +28,9 @@ local function lspConfig()
 			},
 		},
 	})
+    lspconfig.yamlls.setup({
+
+    })
 
 	vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 	vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
