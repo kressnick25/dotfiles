@@ -11,6 +11,7 @@ return {
         })
       end,
     },
+
     { 
         'crispybaccoon/evergarden',
         opts = {
@@ -20,10 +21,7 @@ return {
         }
     },
     {
-        'ellisonleao/gruvbox.nvim',
-        opts = {
-            contrast = 'soft', -- hard|soft|medium
-        }
+        'sainnhe/gruvbox-material'
     },
     { 'savq/melange-nvim' },
     { 'rmehri01/onenord.nvim' },

@@ -3,6 +3,7 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function ()
         opts = {
+           theme = 'gruvbox-material',
            sections = {
                lualine_a = {'mode'},
                lualine_b = {'branch', 'diagnostics'},
