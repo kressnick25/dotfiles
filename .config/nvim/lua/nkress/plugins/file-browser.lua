@@ -14,7 +14,7 @@ local function configFn ()
 
     local opts = {
         filters = {
-            dotfiles = true,
+            dotfiles = false,
             custom = { '^.git$' },
         },
         hijack_cursor = true,
