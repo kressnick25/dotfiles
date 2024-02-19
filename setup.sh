@@ -16,6 +16,8 @@ $install ripgrep
 $install fd-find
 $install delta
 $install bat
+$install zoxide
+echo 'eval "$(zoxide init bash)"' >> ~/.bashrc
 $install xclip
 echo "alias clip='xclip -selection c'" >> $alias_file
 
