@@ -14,6 +14,7 @@ echo "alias vim='nvim'" >> $alias_file
 $install git
 $install ripgrep
 $install fd-find
+$install delta
 $install bat
 $install xclip
 echo "alias clip='xclip -selection c'" >> $alias_file

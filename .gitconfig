@@ -1,0 +1,41 @@
+[user]
+	email = kressnick25@gmail.com
+	name = Nicholas
+[branch]
+    sort = committerdate
+[core]
+    editor = nvim
+    pager = delta
+    autoclrf = false
+[diff]
+    algorithm = histogram
+    colorMoved = default
+    colorMovedWS = allow-indentation-change
+    context = 10
+[fetch]
+    prune = true
+    prunetags = true
+[help]
+    # git commands will autocorrect after 1s delay
+    autocorrect = 10
+[init]
+    # keep consistent with work
+    defaultBrand = master
+[log]
+    date = iso
+[pull]
+    rebase = true
+[push]
+    default = current
+    # push tags along with commits
+    followtags = true
+[merge]
+    conflictstyle = zdiff3
+    tool = nvim
+[rebase]
+    # auto run git stash before rebase, then stash apply
+    autostash = true
+    updateRefs = true
+    # don't allow deleting commits during a rebase
+    missingCommitsCheck = error
+    autosquash = true
