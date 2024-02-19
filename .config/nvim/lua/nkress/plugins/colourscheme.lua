@@ -1,19 +1,19 @@
 return {
     {
-      "neanias/everforest-nvim",
-      version = false,
-      lazy = false,
-      priority = 1000, -- make sure to load this before all the other start plugins
-      -- Optional; default configuration will be used if setup isn't called.
-      config = function()
-        require("everforest").setup({
-          -- Your config here
-        })
-      end,
+        "neanias/everforest-nvim",
+        event = "VeryLazy",
+        version = false,
+        -- Optional; default configuration will be used if setup isn't called.
+        config = function()
+            require("everforest").setup({
+                -- Your config here
+            })
+        end,
     },
 
-    { 
+    {
         'crispybaccoon/evergarden',
+        event = "VeryLazy",
         opts = {
             transparent_background = false,
             contrast_dark = 'hard', -- hard|medium|soft
@@ -23,6 +23,13 @@ return {
     {
         'sainnhe/gruvbox-material'
     },
-    { 'savq/melange-nvim' },
-    { 'rmehri01/onenord.nvim' },
+    {
+        'savq/melange-nvim',
+        event = "VeryLazy",
+    },
+    {
+        'rmehri01/onenord.nvim',
+        event = "VeryLazy",
+
+    },
 }

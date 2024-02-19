@@ -14,7 +14,8 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
-require('lazy').setup('nkress/plugins')
+require('lazy').setup('nkress/plugins', {
+})
 
 vim.opt.termguicolors = true
 vim.cmd.colorscheme 'gruvbox-material' -- gruvbox-material|evergarden|everforrest|onenord

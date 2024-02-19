@@ -69,12 +69,14 @@ end
 return {
 	{
 		"williamboman/mason.nvim",
+        event = "BufReadPost",
 		config = function()
 			require("mason").setup()
 		end,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
+        event = "BufReadPost",
 		config = function()
 			require("mason-lspconfig").setup(mason_opts)
 		end,
