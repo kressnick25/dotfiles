@@ -27,6 +27,14 @@ return {
                             ["<leader>pp"] = "@conditional.outer",
                         },
                     },
+                    lsp_interop = {
+                        enable = true,
+                        peek_definition_code = {
+                            ["<leader>df"] = "@function.outer",
+                            ["<leader>dc"] = "@class.outer",
+                        }
+
+                    }
                 },
             })
         end,
