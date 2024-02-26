@@ -11,6 +11,24 @@ return {
         config = function()
             require("nvim-treesitter.configs").setup({
                 textobjects = {
+                    select = {
+                        enable = true,
+                        lookahead = true,
+
+                        keymaps = {
+                            ["ai"] = { query = "@conditional.outer", desc = "Select conditional outer"},
+                            ["ii"] = { query = "@conditional.inner", desc = "Select conditional inner"},
+
+                            ["al"] = { query = "@loop.outer", desc = "Select loop outer"},
+                            ["il"] = { query = "@loop.inner", desc = "Select loop inner"},
+
+                            ["af"] = { query = "@function.outer", desc = "Select function outer"},
+                            ["if"] = { query = "@function.inner", desc = "Select function inner"},
+
+                            ["ac"] = { query = "@class.outer", desc = "Select class outer"},
+                            ["ic"] = { query = "@class.inner", desc = "Select class inner"},
+                        },
+                    },
                     move = {
                         enable = true,
                         set_jumps = true,
