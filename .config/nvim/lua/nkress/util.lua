@@ -10,7 +10,15 @@ function string:endswith(ending)
     return ending == "" or self:sub(-#ending) == ending
 end
 
-function atwork()
+function Atwork()
     return vim.fn.hostname().startswith("WVA")
 end
 
+function IsUnix()
+    return vim.loop.os_uname().sysname == 'Linux'
+end
+
+function IsWin()
+    return vim.fn.has('win32') or vim.fn.has('win64')
+
+end
