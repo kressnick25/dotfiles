@@ -19,7 +19,7 @@ return {
                     follow_files = true
                 },
                 auto_attach = true,
-                current_line_blame = false
+                current_line_blame = true
             })
         end
     }
