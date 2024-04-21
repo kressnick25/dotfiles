@@ -15,7 +15,7 @@ function Atwork()
 end
 
 function IsUnix()
-    return vim.loop.os_uname().sysname == 'Linux'
+    return vim.has.has('unix')
 end
 
 function IsWin()
