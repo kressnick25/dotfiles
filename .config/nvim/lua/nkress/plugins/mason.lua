@@ -92,32 +92,4 @@ return {
 			})
 		end,
 	},
-	{
-        "https://gitlab.com/schrieveslaach/sonarlint.nvim.git",
-		dependencies = { "nvim-lspconfig", "mason-lspconfig.nvim", "mason.nvim" },
-		-- event = { "BufReadPost", "BufNewFile" },
-		-- cmd = { "LspInfo", "LspInstall", "LspUninstall" },
-		opts = {
-			server = {
-				cmd = {
-					"sonarlint-language-server",
-					-- Ensure that sonarlint-language-server uses stdio channel
-					"-stdio",
-					-- '-analyzers',
-					-- paths to the analyzers you need, using those for python and java in this example
-					-- vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarpython.jar"),
-					-- vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarcfamily.jar"),
-					-- vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarjava.jar"),
-				},
-			},
-			filetypes = {
-				-- Tested and working
-				"groovy",
-
-				"python",
-				"cpp",
-				"java",
-			},
-		},
-	},
 }
