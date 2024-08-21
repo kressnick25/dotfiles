@@ -59,14 +59,13 @@ return {
 
 		-- Clone the default Telescope configuration
 		local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
-
+		--
 		-- I want to search in hidden/dot files.
 		table.insert(vimgrep_arguments, "--hidden")
-		-- remove leading whitespace from results output
-		table.insert(vimgrep_arguments, "")
 		-- I don't want to search in the `.git` directory.
 		table.insert(vimgrep_arguments, "--glob")
 		table.insert(vimgrep_arguments, "!**/.git/*")
+		table.insert(vimgrep_arguments, "!**/node_modules/*")
 
 		telescope.setup({
 			defaults = {
