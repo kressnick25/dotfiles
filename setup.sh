@@ -17,6 +17,7 @@ $install fd-find
 $install delta
 $install bat
 $install zoxide
+$install lazygit
 echo 'eval "$(zoxide init bash)"' >> ~/.bashrc
 $install xclip
 echo "alias clip='xclip -selection c'" >> $alias_file
@@ -24,3 +25,8 @@ echo "alias clip='xclip -selection c'" >> $alias_file
 # languge servers
 $install python3-pip
 pip install pyright
+
+# allow docker-compose to connect to podman non-root
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+systemctl --user start podman.socket
+export DOCKER_HOST="unix:///run/user/$(id
