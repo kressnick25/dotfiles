@@ -2,8 +2,12 @@
 
 set -e
 
-container_id=$(podman run --rm --detach fedora:latest sleep infinity)
+IMAGE=$1
 
-podman exec -i $container_id bash < ./test.sh
+container_name="dotfiles-test-$(date +%s)"
 
-podman kill $container_id
+podman run --name $container_name --rm --detach $IMAGE tail -f /dev/null
+# always cleanup container on exit
+trap "podman kill $container_name" EXIT 
+
+podman exec -i $container_name bash < ./test.sh

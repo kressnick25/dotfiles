@@ -2,13 +2,19 @@
 
 set -ev
 
+distro=$(cat /etc/os-release | grep '^ID=' | sed s/ID=//)
 
-useradd tester || echo "tester already exists"
+useradd -m tester || echo "tester already exists"
 
 cd /home/tester
 rm -rf dotfiles .dotfiles
 
-sudo dnf install -y git
+if [ $distro = "ubuntu" ]; then
+    apt-get update
+    apt-get install -y git sudo
+elif [ $distro = "fedora" ]; then
+    sudo dnf install -y git
+fi
 
 git clone https://github.com/kressnick25/dotfiles.git
 cd dotfiles && git switch test && cd /home/tester
