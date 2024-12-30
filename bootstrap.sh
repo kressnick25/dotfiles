@@ -38,6 +38,7 @@ packages=(
     bat
     delta
     fd-find
+    fish
     git
     gpg2
     golang
@@ -88,4 +89,9 @@ if [ ! -d "$HOME/.password-store/" ]; then
     pass init $secret_key_id
 else
     log "pass is already installed." 
+fi
+
+if command -v fish 2>&1 >/dev/null; then
+    log "run fish bootstrap"
+    fish ./.config/bootstrap.fish
 fi
