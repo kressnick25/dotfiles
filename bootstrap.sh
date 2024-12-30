@@ -3,7 +3,7 @@
 ### Nicholas Kress terminal setup
 # assumes fedora distro
 
-set -e
+#set -e
 
 function log {
     GREEN="\033[0;32m"
