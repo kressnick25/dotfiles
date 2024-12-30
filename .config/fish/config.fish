@@ -23,5 +23,6 @@ alias cat bat
 alias e nvim
 alias v nvim
 alias vim nvim
+alias lg lazygit
 alias reload "source ~/.config/fish/config.fish"
 
