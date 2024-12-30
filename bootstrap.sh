@@ -3,7 +3,7 @@
 ### Nicholas Kress terminal setup
 # assumes fedora distro
 
-#set -e
+set -e
 
 function log {
     GREEN="\033[0;32m"
@@ -82,7 +82,7 @@ go install golang.org/x/tools/gopls@latest
 log "setup docker-compose for podman"
 # allow docker-compose to connect to podman non-root
 export XDG_RUNTIME_DIR="/run/user/$(id -u)"
-systemctl --user start podman.socket
+systemctl --user start podman.socket || log "unable to enable podman compose"
 export DOCKER_HOST="unix:///run/user/$(id -u)"
 
 # setup password manager
