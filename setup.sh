@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa_$(hostname)
 
 mkdir .bashrc.d
@@ -30,3 +32,14 @@ pip install pyright
 export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 systemctl --user start podman.socket
 export DOCKER_HOST="unix:///run/user/$(id
+
+# setup password manager
+# https://ryan.himmelwright.net/post/setting-up-pass/
+if [ ! -d "~/.password-store" ]; then
+    echo "Setting up pass..."
+    $install gpg2 pass
+    gpg2 --full-key-gen
+    
+    read -p "Enter uid of secret key from 'gpg --list-secret-keys'" secret-key-id
+    pass init $secret-key-id
+fi
