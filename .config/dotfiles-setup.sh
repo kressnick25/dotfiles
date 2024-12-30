@@ -1,45 +1,91 @@
 #!/usr/bin/env bash
 
-ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa_$(hostname)
+### Nicholas Kress terminal setup
+# assumes fedora distro
 
-mkdir .bashrc.d
-touch .bashrc.d/alias
-alias_file="~/.bashrc.d/alias.bashrc"
+set -e
 
+function log {
+    GREEN="\033[0;32m"
+    BLUE="\033[0;34m"
+    CYAN="\033[0;36m"
+    NC="\033[0m"
+    log_header="[ DOTFILES ]"
 
-install="sudo dnf install"
+    echo -e "${CYAN}$log_header ${BLUE}$1${NC}"
+}
 
-$install neovim
-$install tmux
-echo "alias vim='nvim'" >> $alias_file
+ssh_key=~/.ssh/id_ed25519_$(hostname)
+if [ ! -f $ssh_key ]; then
+    log "generate SSH key: $ssh_key"
+    ssh-keygen \
+        -t ed25519 \
+        -C "kressnick25@gmail.com" \
+        -N "" \
+        -f ~/.ssh/id_ed25519_$(hostname)
+else
+    log "SSH key already created: $ssh_key"
+fi
 
-$install git
-$install ripgrep
-$install fd-find
-$install delta
-$install bat
-$install zoxide
-$install lazygit
-echo 'eval "$(zoxide init bash)"' >> ~/.bashrc
-$install xclip
-echo "alias clip='xclip -selection c'" >> $alias_file
+log "enable dnf repos"
+dnf_repos=(
+    atim/lazygit
+)
+sudo dnf copr enable "${dnf_repos[@]}" -y
 
+log "install packages"
+packages=(
+    bat
+    delta
+    fd-find
+    git
+    gpg2
+    golang
+    java-latest-openjdk
+    jq
+    lazygit
+    neovim
+    pass
+    python3-pip
+    ripgrep
+    tmux
+    xclip
+    yq
+    zoxide
+)
+sudo dnf install -y --skip-unavailable "${packages[@]}"
+
+log "create ~/.local/"
+mkdir -p ~/.local/bin
+mkdir -p ~/.local/opt
+
+if [ ! -d ~/.venv/ ]; then
+    log "Set up python3 virtualenv"
+    python3 -m venv ~/.venv
+    source ~/.venv/bin/activate
+else
+    log "python3 virtualenv already created"
+fi
+
+log "install language servers"
 # languge servers
-$install python3-pip
 pip install pyright
+go install golang.org/x/tools/gopls@latest
 
+log "setup docker-compose for podman"
 # allow docker-compose to connect to podman non-root
 export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 systemctl --user start podman.socket
-export DOCKER_HOST="unix:///run/user/$(id
+export DOCKER_HOST="unix:///run/user/$(id -u)"
 
 # setup password manager
 # https://ryan.himmelwright.net/post/setting-up-pass/
-if [ ! -d "~/.password-store" ]; then
-    echo "Setting up pass..."
-    $install gpg2 pass
+if [ ! -d "$HOME/.password-store/" ]; then
+    log "set up pass"
     gpg2 --full-key-gen
     
-    read -p "Enter uid of secret key from 'gpg --list-secret-keys'" secret-key-id
-    pass init $secret-key-id
+    read -p "Enter uid of secret key from 'gpg --list-secret-keys'" secret_key_id
+    pass init $secret_key_id
+else
+    log "pass is already installed." 
 fi
