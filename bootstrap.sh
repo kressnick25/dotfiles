@@ -100,7 +100,7 @@ Expire-Date: 0
 %commit
 EOF
     
-    read -p "Enter uid of secret key from 'gpg --list-secret-keys'" secret_key_id
+    secret_key_id=$(gpg2 --list-keys --with-colons | grep uid | tail -n1 | cut -d':' -f8)
     pass init $secret_key_id
 else
     log "pass is already installed." 
