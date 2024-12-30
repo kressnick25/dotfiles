@@ -15,18 +15,6 @@ function log {
     echo -e "${CYAN}$log_header ${BLUE}$1${NC}"
 }
 
-ssh_key=~/.ssh/id_ed25519_$(hostname)
-if [ ! -f $ssh_key ]; then
-    log "generate SSH key: $ssh_key"
-    ssh-keygen \
-        -t ed25519 \
-        -C "kressnick25@gmail.com" \
-        -N "" \
-        -f ~/.ssh/id_ed25519_$(hostname)
-else
-    log "SSH key already created: $ssh_key"
-fi
-
 log "enable dnf repos"
 dnf_repos=(
     atim/lazygit
@@ -42,11 +30,13 @@ packages=(
     git
     gpg2
     golang
+    hostname
     java-latest-openjdk
     jq
     lazygit
     neovim
     pass
+    podman
     python3-pip
     ripgrep
     stow
@@ -59,6 +49,18 @@ sudo dnf install -y --skip-unavailable "${packages[@]}"
 
 log "stow dotfiles"
 stow --adopt .
+
+ssh_key=~/.ssh/id_ed25519_$(hostname)
+if [ ! -f $ssh_key ]; then
+    log "generate SSH key: $ssh_key"
+    ssh-keygen \
+        -t ed25519 \
+        -C "kressnick25@gmail.com" \
+        -N "" \
+        -f ~/.ssh/id_ed25519_$(hostname)
+else
+    log "SSH key already created: $ssh_key"
+fi
 
 log "create ~/.local/"
 mkdir -p ~/.local/bin
