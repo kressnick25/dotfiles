@@ -49,12 +49,16 @@ packages=(
     pass
     python3-pip
     ripgrep
+    stow
     tmux
     xclip
     yq
     zoxide
 )
 sudo dnf install -y --skip-unavailable "${packages[@]}"
+
+log "stow dotfiles"
+stow --adopt .
 
 log "create ~/.local/"
 mkdir -p ~/.local/bin
