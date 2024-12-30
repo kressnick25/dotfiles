@@ -89,7 +89,7 @@ export DOCKER_HOST="unix:///run/user/$(id -u)"
 # https://ryan.himmelwright.net/post/setting-up-pass/
 if [ ! -d "$HOME/.password-store/" ]; then
     log "set up pass"
-    gpg2 --full-key-gen
+    gpg2 --full-gen-key
     
     read -p "Enter uid of secret key from 'gpg --list-secret-keys'" secret_key_id
     pass init $secret_key_id
