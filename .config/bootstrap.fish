@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-if type -q $fisher 
+if not type -q fisher 
     echo "fisher not found. Installing from source"
     curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 end
