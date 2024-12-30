@@ -89,7 +89,16 @@ export DOCKER_HOST="unix:///run/user/$(id -u)"
 # https://ryan.himmelwright.net/post/setting-up-pass/
 if [ ! -d "$HOME/.password-store/" ]; then
     log "set up pass"
-    gpg2 --full-gen-key
+    gpg2 --batch --full-generate-key <<EOF
+Key-Type: ECDSA
+Key-Curve: nistp256
+Key-Usage: sign
+Name-Real: Nicholas Kress
+Name-Email: kressnick25@gmail.com
+Expire-Date: 0
+%no-protection
+%commit
+EOF
     
     read -p "Enter uid of secret key from 'gpg --list-secret-keys'" secret_key_id
     pass init $secret_key_id
