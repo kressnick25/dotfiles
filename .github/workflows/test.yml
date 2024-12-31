@@ -18,8 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          path: .dotfiles/
+          path: checkout/
 
       - name: Run tests
-        working-directory: .dotfiles/
+        working-directory: checkout/
         run: ./test.sh --skip-checkout
