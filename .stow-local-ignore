@@ -1,1 +1,4 @@
 .git
+bootstrap.sh
+test.sh
+test-container.sh

@@ -1,0 +1,50 @@
+name: Functional test
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+  pull_request:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  bootstrap-fedora:
+    runs-on: ubuntu-latest
+    container:
+      image: "fedora:41"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: .dotfiles/
+
+      - name: Run tests
+        working-directory: .dotfiles/
+        run: ./bootstrap.sh
+
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
+
+  bootstrap-ubuntu:
+    runs-on: ubuntu-latest
+    container:
+      image: "ubuntu:24.04"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: .dotfiles/
+
+      - name: Install dependencies
+        run: apt-get update && apt-get install -y sudo
+
+      - name: Run tests
+        working-directory: .dotfiles/
+        run: ./bootstrap.sh
+
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
