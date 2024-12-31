@@ -95,6 +95,7 @@ stow --adopt .
 ssh_key=~/.ssh/id_ed25519_$(hostname)
 if [ ! -f $ssh_key ]; then
     log "generate SSH key: $ssh_key"
+    mkdir -p ~/.ssh
     ssh-keygen \
         -t ed25519 \
         -C "kressnick25@gmail.com" \
