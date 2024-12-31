@@ -1,0 +1,25 @@
+name: Functional test
+on:
+  push:
+    #  - main
+    #  - master
+  workflow_dispatch:
+  pull_request:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  bootstrap-fedora:
+    runs-on: ubuntu-latest
+    container:
+      image: "fedora:41"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: .dotfiles/
+
+      - name: Run tests
+        working-directory: .dotfiles/
+        run: ./test.sh --skip-checkout
