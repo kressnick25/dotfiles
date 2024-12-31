@@ -18,10 +18,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          path: checkout/
+          path: .dotfiles/
 
       - name: Run tests
-        working-directory: checkout/
+        working-directory: .dotfiles/
         run: ./test.sh --skip-checkout
 
       - name: Setup tmate session

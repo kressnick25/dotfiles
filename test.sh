@@ -17,10 +17,8 @@ fi
 
 if [ $# -eq 0 ]; then # no args, use 'skip-checkout' to skip
     echo "Checking out dotfiles"
-    git clone https://github.com/kressnick25/dotfiles.git
-    cd dotfiles && git switch test && cd ..
+    git clone https://github.com/kressnick25/dotfiles.git .dotfiles
+    cd .dotfiles && git switch test
 fi
 
-mv dotfiles .dotfiles
-cd .dotfiles
-bash bootstrap.sh
+bash ./bootstrap.sh
