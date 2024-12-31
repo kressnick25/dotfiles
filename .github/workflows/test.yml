@@ -22,7 +22,7 @@ jobs:
 
       - name: Run tests
         working-directory: .dotfiles/
-        run: ./test.sh --skip-checkout
+        run: ./bootstrap.sh
 
       - name: Setup tmate session
         if: ${{ failure() }}
