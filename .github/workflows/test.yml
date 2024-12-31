@@ -23,3 +23,7 @@ jobs:
       - name: Run tests
         working-directory: checkout/
         run: ./test.sh --skip-checkout
+
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
