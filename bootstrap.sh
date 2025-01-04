@@ -32,6 +32,9 @@ function install_packages {
 }
 
 distro=$(cat /etc/os-release | grep '^ID=' | sed s/ID=//)
+if [ $distro = "debian" ]; then
+    distro=ubuntu
+fi
 
 if [ $distro = "fedora" ]; then
     log "enable dnf repos"
@@ -40,6 +43,24 @@ if [ $distro = "fedora" ]; then
     )
     sudo dnf copr enable "${dnf_repos[@]}" -y
 fi
+
+# kubectl install
+KUBE_VERSION="v1.32"
+if [ ! -f /etc/apt/keyrings/kubernetes-apt-keyring.gpg ]; then
+    if [ $distro = "ubuntu" ]; then
+        log "enable dnf repos"
+        sudo apt-get install -y apt-transport-https ca-certificates curl gnupg 
+        curl -fsSL https://pkgs.k8s.io/core:/stable:/$KUBE_VERSION/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+        sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg # allow unprivileged APT programs to read this keyring
+        echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/$KUBE_VERSION/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+        sudo chmod 644 /etc/apt/sources.list.d/kubernetes.list   # helps tools such as command-not-found to work correctly
+        sudo apt-get update
+        sudo apt-get install -y kubectl
+    elif [ $distro = "fedora" ]; then
+        echo "TODO fedora kubectl install"
+    fi
+fi
+
 
 log "install packages"
 packages=(
