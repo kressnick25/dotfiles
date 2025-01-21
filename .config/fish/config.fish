@@ -1,10 +1,10 @@
-set PATH ~/.local/bin $PATH
-set PATH /usr/local/go/bin $PATH
-set PATH ~/go/bin $PATH
-set PATH ~/.local/opt/yazi $PATH
-set PATH ~/.npm-global/bin $PATH
-set PATH /opt/nvim-linux64/bin $PATH
-set PATH /opt/homebrew/bin $PATH
+fish_add_path ~/.local/bin 
+fish_add_path /usr/local/go/bin 
+fish_add_path ~/go/bin 
+fish_add_path ~/.local/opt/yazi 
+fish_add_path ~/.npm-global/bin 
+fish_add_path /opt/nvim-linux64/bin 
+fish_add_path /opt/homebrew/bin 
 fish_add_path /opt/homebrew/sbin
 
 set BAT_THEME gruvbox-dark
