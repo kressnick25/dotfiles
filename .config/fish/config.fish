@@ -1,10 +1,3 @@
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-
-    zoxide init fish | source
-    kubectl completion fish | source
-end
-
 set PATH ~/.local/bin $PATH
 set PATH /usr/local/go/bin $PATH
 set PATH ~/go/bin $PATH
@@ -33,3 +26,11 @@ alias reload "source ~/.config/fish/config.fish"
 alias docker="sudo docker"
 alias docker-tools="sudo docker exec -it tools /bin/bash"
 alias compose-up="sudo docker compose -f ~/config/docker/core.yml up -d"
+
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+
+    zoxide init fish | source
+    kubectl completion fish | source
+end
+
