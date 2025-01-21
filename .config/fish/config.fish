@@ -11,6 +11,7 @@ set PATH ~/go/bin $PATH
 set PATH ~/.local/opt/yazi $PATH
 set PATH ~/.npm-global/bin $PATH
 set PATH /opt/nvim-linux64/bin $PATH
+set PATH /opt/homebrew/bin $PATH
 
 set BAT_THEME gruvbox-dark
 # expires 2024-11-21 + 30 days
