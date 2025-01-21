@@ -5,6 +5,7 @@ set PATH ~/.local/opt/yazi $PATH
 set PATH ~/.npm-global/bin $PATH
 set PATH /opt/nvim-linux64/bin $PATH
 set PATH /opt/homebrew/bin $PATH
+fish_add_path /opt/homebrew/sbin
 
 set BAT_THEME gruvbox-dark
 # expires 2024-11-21 + 30 days
@@ -26,6 +27,7 @@ alias reload "source ~/.config/fish/config.fish"
 alias docker="sudo docker"
 alias docker-tools="sudo docker exec -it tools /bin/bash"
 alias compose-up="sudo docker compose -f ~/config/docker/core.yml up -d"
+alias python="python3.11"
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
