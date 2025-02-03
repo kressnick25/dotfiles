@@ -17,7 +17,7 @@ return {
 					"pyright",
 					"yamlls",
 					"gopls",
-                    "bash-language-server",
+                    "bashls",
 				},
 				-- auto install associated LSP on file open
 				automatic_installation = false,
@@ -39,7 +39,7 @@ return {
 			lspconfig.gopls.setup({
 				capabilites = cap,
 			})
-			lspconfig.tsserver.setup({
+			lspconfig.ts_ls.setup({
 				capabilities = cap,
 			})
             lspconfig.bashls.setup({
