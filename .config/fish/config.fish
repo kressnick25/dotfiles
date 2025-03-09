@@ -17,8 +17,7 @@ set GREP_OPTIONS '--color=auto'
 set TERM xterm-color
 set CLICOLOR 1
 
-
-alias cat batcat
+alias cat bat
 alias e nvim
 alias v nvim
 alias vim nvim

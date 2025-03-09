@@ -18,8 +18,8 @@
   },
   "theme": {
     "mode": "system",
-    "light": "One Light",
-    "dark": "Catppuccin Frappé"
+    "light": "Gruvbox Dark",
+    "dark": "Gruvbox Dark"
   },
   "ui_font_size": 16,
   "vim_mode": true
