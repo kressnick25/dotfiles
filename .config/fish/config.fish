@@ -5,11 +5,12 @@ if status is-interactive
     kubectl completion fish | source
 end
 
-set PATH ~/.local/bin $PATH
-set PATH /usr/local/go/bin $PATH
-set PATH ~/go/bin $PATH
-set PATH ~/.local/opt/yazi $PATH
-set PATH ~/.npm-global/bin $PATH
+fish_add_path ~/.local/bin
+fish_add_path /usr/local/go/bin
+fish_add_path ~/go/bin
+fish_add_path ~/.local/opt/yazi
+fish_add_path ~/.npm-global/bin
+fish_add_path /opt/nvim/bin
 
 set BAT_THEME gruvbox-dark
 # expires 2024-11-21 + 30 days
@@ -28,3 +29,7 @@ alias reload "source ~/.config/fish/config.fish"
 alias erc "nvim ~/.config/fish/config.fish"
 
 # source ~/.venv/bin/activate
+
+function ssh-copy-terminfo -d "Copy terminfo to remote SSH server"
+    infocmp -x | ssh $argv -- tic -x -
+end
