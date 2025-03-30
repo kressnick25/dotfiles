@@ -1,5 +1,6 @@
 return {
 	"nvimtools/none-ls.nvim",
+    event = 'BufEnter',
     keys = {
         {'<leader>gf', vim.lsp.buf.format, desc = 'Format buffer'}
     },
@@ -12,7 +13,5 @@ return {
                 null_ls.builtins.formatting.prettier
 			},
 		})
-
-		-- vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
 	end,
 }
