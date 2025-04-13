@@ -28,6 +28,7 @@ alias docker="sudo docker"
 alias docker-tools="sudo docker exec -it tools /bin/bash"
 alias compose-up="sudo docker compose -f ~/config/docker/core.yml up -d"
 alias python="python3.11"
+alias erc "nvim ~/.config/fish/config.fish"
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
@@ -38,4 +39,8 @@ end
 
 if not set -q SSH_AUTH_SOCK
     eval (ssh-agent -c)
+end
+
+function ssh-copy-terminfo -d "Copy terminfo to remote SSH server"
+    infocmp -x | ssh $argv -- tic -x -
 end
