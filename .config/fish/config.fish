@@ -17,6 +17,9 @@ set KUBECONFIG ~/.kube/config
 set GREP_OPTIONS '--color=auto'
 set TERM xterm-color
 set CLICOLOR 1
+set -Ux MANPAGER 'nvim +Man!'
+set -Ux RUSTUP_HOME ~/.config/rustup
+set -Ux CARGO_HOME ~/.config/cargo
 
 alias cat bat
 alias e nvim
@@ -27,7 +30,6 @@ alias reload "source ~/.config/fish/config.fish"
 alias docker="sudo docker"
 alias docker-tools="sudo docker exec -it tools /bin/bash"
 alias compose-up="sudo docker compose -f ~/config/docker/core.yml up -d"
-alias python="python3.11"
 alias erc "nvim ~/.config/fish/config.fish"
 
 if status is-interactive
