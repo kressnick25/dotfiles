@@ -1,3 +1,5 @@
 .config/cargo
 .config/go/telemetry/local
 .config/rustup
+
+.config/fish/functions/
