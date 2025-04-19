@@ -6,7 +6,6 @@ return {
 			python = { "black" },
 			lua = { "stylua" },
 			javascript = { "prettier" },
-			rust = { "rustfmt" },
 		},
 		default_format_opts = {
 			lsp_format = "fallback",

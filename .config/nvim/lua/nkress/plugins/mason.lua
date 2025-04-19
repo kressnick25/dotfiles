@@ -22,7 +22,6 @@ return {
 					"stylua",
 					"black",
 					"prettier",
-					"rustfmt",
 				},
 				-- auto install associated LSP on file open
 				automatic_installation = false,
