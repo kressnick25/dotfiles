@@ -41,6 +41,7 @@ end
 
 if not set -q SSH_AUTH_SOCK
     eval (ssh-agent -c)
+    ssh-add
 end
 
 function ssh-copy-terminfo -d "Copy terminfo to remote SSH server"
