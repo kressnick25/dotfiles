@@ -4,7 +4,13 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     -- or if using mini.icons/mini.nvim
     -- dependencies = { "echasnovski/mini.icons" },
-    opts = {},
+    opts = {
+        files = {
+           hidden = true,
+           rg_opts = [[--color=never --hidden --files -g "!.git"]]
+        }
+
+    },
     keys = {
         {
             "<leader>ff",
