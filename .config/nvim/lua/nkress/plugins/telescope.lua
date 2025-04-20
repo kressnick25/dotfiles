@@ -28,6 +28,13 @@ return {
 			desc = "Live grep",
 		},
 		{
+			"<leader>fm",
+			function()
+				require("fzf-lua").marks()
+			end,
+			desc = "Marks",
+		},
+		{
 			"<leader>fb",
 			function()
 				require("fzf-lua").buffers()
