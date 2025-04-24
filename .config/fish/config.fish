@@ -20,6 +20,7 @@ set CLICOLOR 1
 set -Ux MANPAGER 'nvim +Man!'
 set -Ux RUSTUP_HOME ~/.config/rustup
 set -Ux CARGO_HOME ~/.config/cargo
+set -Ux KUBE_EDITOR nvim
 
 alias cat bat
 alias e nvim
