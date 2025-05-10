@@ -3,6 +3,8 @@
   "alduin.nvim": { "branch": "main", "commit": "7fb0a2f425123565783c9cc7eed49f510e62c255" },
   "alpha-nvim": { "branch": "main", "commit": "de72250e054e5e691b9736ee30db72c65d560771" },
   "blink.cmp": { "branch": "main", "commit": "cb5e346d9e0efa7a3eee7fd4da0b690c48d2a98e" },
+  "blink.compat": { "branch": "main", "commit": "2ed6d9a28b07fa6f3bface818470605f8896408c" },
+  "cmp-jenkinsfile": { "branch": "main", "commit": "cf0b5dafc8239ac038da630f0c780a71d064866b" },
   "conform.nvim": { "branch": "master", "commit": "6632e7d788a85bf8405ea0c812d343fc308b7b8c" },
   "everforest-nvim": { "branch": "main", "commit": "135cc21a45756e688dd1a3cbeb1c80a04b569b46" },
   "evergarden": { "branch": "mega", "commit": "289a18f1fb1cf0095007ddbcf58d6325408529ff" },
