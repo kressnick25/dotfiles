@@ -11,7 +11,7 @@ fish_add_path /opt/homebrew/sbin
 set BAT_THEME gruvbox-dark
 # expires 2024-11-21 + 30 days
 # github container registry
-set CR_PAT $(pass ghcr-token)
+# set CR_PAT $(pass ghcr-token)
 set JIRA_HOST jira.int.corp.sun
 set KUBECONFIG ~/.kube/config
 set GREP_OPTIONS '--color=auto'
