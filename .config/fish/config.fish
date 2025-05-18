@@ -4,7 +4,7 @@ fish_add_path /usr/local/go/bin
 fish_add_path ~/go/bin 
 fish_add_path ~/.local/opt/yazi 
 fish_add_path ~/.npm-global/bin 
-fish_add_path /opt/nvim-linux64/bin 
+fish_add_path /opt/nvim/bin 
 fish_add_path /opt/homebrew/bin 
 fish_add_path /opt/homebrew/sbin
 
