@@ -4,8 +4,11 @@ local path = "./gdsl.groovy"
 local buf = vim.fn.bufadd(path)
 vim.fn.bufload(buf)
 
+-- TODO the GDSL is sorted into steps that require a 'node' context.
+-- Is it worth parsing these? Then only show if current suggestion 
+-- is has a parent TSNode of 'node' type.
+
 local parser = vim.treesitter.get_parser(buf, 'groovy')
-print(parser)
 
 --- @param node TSNode?
 --- @return string
@@ -20,10 +23,8 @@ end
 local function traverse_node(node, indent)
     indent = indent or 0
     local indent_str = string.rep("  ", indent)
-
     -- Print node information
     print(indent_str .. "Node: " .. node:type())
-
     -- Traverse child nodes
     for child, _ in node:iter_children() do
         traverse_node(child, indent + 1)
@@ -54,7 +55,6 @@ local function parse_params(node)
     if node:type() ~= "map" then
         error("parse_params: unexpected node type: " .. node:type())
     end
-
     for _, key_value_pair_node in ipairs(node:named_children()) do
         local key = node_text(key_value_pair_node:named_child(0))
         local val = node_text(key_value_pair_node:named_child(1))
@@ -67,31 +67,54 @@ local function parse_params(node)
         end
         params[key] = val
     end
-
     return params
 end
 
 --- @param node TSNode
---- @return table
-local function parse_named_parameter(node)
-    return {}
+--- @return string, string
+local function parse_named_parameter_definition(node)
+    local name = ''
+    local type = ''
+    if node:named_child_count() ~= 2 then
+        error("Unexpected number of named_children (!2)")
+    end
+    for _, key_value_pair_node in ipairs(node:named_children()) do
+        local val = key_value_pair_node:named_child(1)
+        local val_text = strip_surround(node_text(val))
+        if name == '' then
+            name = val_text
+        else
+            type = val_text
+        end
+    end
+    return name, type
 end
 
 
 --- @param node TSNode
---- @return table
+--- @return table a list of (name, type) pairs
 local function parse_named_params(node)
-    return {}
+    local params = {}
+    if node:type() ~= "list" then
+        error("parse_named_params: expected node:type to be list, got: " .. node:type())
+    end
+    for _, key_value_pair_node in ipairs(node:named_children()) do
+        -- named_child[0] == 'parameter'
+        local definition = key_value_pair_node:named_child(1) -- (name: 'foo', type: 'bar')
+        if definition ~= nil then
+            local name, type = parse_named_parameter_definition(definition)
+            params[name] = type
+        end
+    end
+    return params
 end
 
 --- @param map table
 local function format_map(map)
     local result = "{\n"
-
     for k, v in pairs(map) do
         result = result .. "\t'" .. k .. "' : '" .. v .. "',\n"
     end
-
     result = result .. "}"
     return result
 end
@@ -99,19 +122,17 @@ end
 if parser ~= nil then
     local tree = parser:parse(true)[1]
     local root = tree:root()
-
     print("Root node type: " .. root:type())
     local has_children = false
     local count = 0
-
     for _ in root:iter_children() do
         has_children = true
         count = count + 1
     end
 
-
-    -- print("Root has children: " .. tostring(has_children) .. " (count: " .. count .. ")")
-    -- traverse_node(root)
+    if not has_children then
+        error("Unable to parse file '"..path.."', no children")
+    end
 
     -- get all function calls with function name == "method"
     -- TODO refine, this is picking up 'method' as well as 'method()' (want 2nd not first)
@@ -119,24 +140,18 @@ if parser ~= nil then
         ;query
         (function_call function: ((identifier) @method_name (#eq? @method_name "method"))) @m
     ]])
-    for id, node, metdata in method_query:iter_captures(root, buf) do
-        -- print(node:type())
-        if node:type() == "function_call" then
-            -- print(vim.treesitter.get_node_text(node, buf))
-            local argument_list = node:child(1)
 
+    local all_definitions = {}
+    local i = 1
+    for _id, node, _metdata in method_query:iter_captures(root, buf) do
+        if node:type() == "function_call" then
+            local argument_list = node:child(1)
             local def = {}
             if argument_list ~= nil then
-                -- print(argument_list:type())
-                -- print(vim.treesitter.get_node_text(argument_list, buf))
-
                 for arg in argument_list:iter_children() do
-                    -- print(arg:type())
-                    -- print(vim.treesitter.get_node_text(arg, buf))
                     local key_node = arg:child(0)
                     local val_node = arg:child(2)
                     if key_node ~= nil then
-                        -- @type string
                         local key = vim.treesitter.get_node_text(key_node, buf)
                         if val_node ~= nil then
                             -- type string|table
@@ -147,26 +162,27 @@ if parser ~= nil then
                                 val = parse_named_params(val_node)
                             else
                                 val = vim.treesitter.get_node_text(val_node, buf)
-                                def[key] = val
                             end
                             def[key] = val
                         end
                     end
                 end
             end
-            print("!!table def is")
-            for key, val in pairs(def) do
-                if type(val) == "table" then
-                    print("key: " .. key .. " val: " .. format_map(val))
-                else
-                    print("key: " .. key .. " val: " .. val)
-                end
-            end
-            print("!! end table")
+            all_definitions[i] = def
+            i = i + 1
         end
+    end
 
-
-        break
+    -- print all
+    for _, def in ipairs(all_definitions) do
+        print("\n")
+        for key, val in pairs(def) do
+            if type(val) == "table" then
+                print(key .. ": " .. format_map(val))
+            else
+                print(key .. ": " .. val)
+            end
+        end
     end
 end
 
