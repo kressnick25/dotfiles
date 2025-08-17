@@ -140,7 +140,7 @@ fi
 
 log "install language servers"
 # languge servers
-pip install pyright
+pip install pyright --break-system-packages
 go install golang.org/x/tools/gopls@latest
 
 log "setup docker-compose for podman"
