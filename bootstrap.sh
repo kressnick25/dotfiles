@@ -82,6 +82,7 @@ packages=(
     tmux
     xclip
     zoxide
+    npm # required by mason
 )
 fedora_packages=(
     lazygit
@@ -179,4 +180,11 @@ fi
 if command -v fish 2>&1 >/dev/null; then
     log "run fish bootstrap"
     fish ./.config/bootstrap.fish
+fi
+
+if command -v tmux 2>&1 >/dev/null; then
+    mkdir -p ~/.tmux/plugins
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    mkdir -p ~/.config/tmux/plugins/catppuccin
+    git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
 fi
