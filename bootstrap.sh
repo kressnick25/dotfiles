@@ -69,6 +69,7 @@ packages=(
     delta
     fd-find
     fish
+    fzf
     git
     golang
     hostname
