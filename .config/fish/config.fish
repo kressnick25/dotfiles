@@ -8,6 +8,7 @@ fish_add_path /opt/nvim/bin
 fish_add_path /opt/homebrew/bin 
 fish_add_path /opt/homebrew/sbin
 fish_add_path /opt/nvim-linux64/bin
+fish_add_path /home/linuxbrew/.linuxbrew/bin
 
 set BAT_THEME gruvbox-dark
 # expires 2024-11-21 + 30 days

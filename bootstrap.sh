@@ -36,32 +36,6 @@ if [ $distro = "debian" ]; then
     distro=ubuntu
 fi
 
-if [ $distro = "fedora" ]; then
-    log "enable dnf repos"
-    dnf_repos=(
-        atim/lazygit
-    )
-    sudo dnf copr enable "${dnf_repos[@]}" -y
-fi
-
-# kubectl install
-KUBE_VERSION="v1.32"
-if [ ! -f /etc/apt/keyrings/kubernetes-apt-keyring.gpg ]; then
-    if [ $distro = "ubuntu" ]; then
-        log "enable dnf repos"
-        sudo apt-get install -y apt-transport-https ca-certificates curl gnupg 
-        curl -fsSL https://pkgs.k8s.io/core:/stable:/$KUBE_VERSION/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-        sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg # allow unprivileged APT programs to read this keyring
-        echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/$KUBE_VERSION/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-        sudo chmod 644 /etc/apt/sources.list.d/kubernetes.list   # helps tools such as command-not-found to work correctly
-        sudo apt-get update
-        sudo apt-get install -y kubectl
-    elif [ $distro = "fedora" ]; then
-        echo "TODO fedora kubectl install"
-    fi
-fi
-
-
 log "install packages"
 packages=(
     bat
@@ -103,13 +77,16 @@ elif [ $distro = "fedora" ]; then
 fi
 install_packages $distro "${packages[@]}"
 
-if [ $distro = "ubuntu" ]; then
-    log "install lazygit"
-    lg_version=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
-    curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${lg_version}/lazygit_${lg_version}_Linux_x86_64.tar.gz"
-    tar xf lazygit.tar.gz lazygit
-    sudo install lazygit -D -t /usr/local/bin/
-fi
+# install homebrew package manager
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew=/home/linuxbrew/.linuxbrew/bin/brew
+
+brew_pkgs=(
+    lazygit
+    kubectl
+    k9s
+)
+$brew install @packages
 
 
 log "stow dotfiles"
