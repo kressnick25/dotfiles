@@ -1,0 +1,7 @@
+lazygit
+kubectl
+k9s
+openjdk
+gpg
+yq
+python3

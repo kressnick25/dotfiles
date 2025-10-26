@@ -22,3 +22,4 @@ vim.cmd.colorscheme 'vague' -- gruvbox-material|evergarden|everforrest|onenord|v
 vim.g.gruvbox_material_background = 'medium'
 vim.g.gruvbox_material_foreground = 'original'
 vim.o.background = 'dark'
+

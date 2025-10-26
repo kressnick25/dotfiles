@@ -36,58 +36,21 @@ if [ $distro = "debian" ]; then
     distro=ubuntu
 fi
 
-log "install packages"
-packages=(
-    bat
-    curl
-    delta
-    fd-find
-    fish
-    fzf
-    git
-    golang
-    hostname
-    jq
-    neovim
-    pass
-    podman
-    python3-pip
-    ripgrep
-    stow
-    tmux
-    xclip
-    zoxide
-    npm # required by mason
-)
-fedora_packages=(
-    lazygit
-    java-latest-openjdk
-    gpg2
-    yq
-)
-ubuntu_packages=(
-    gnupg
-    default-jdk
-    python3-venv
-)
-if [ $distro = "ubuntu" ]; then
-    packages=("${packages[@]}" "${ubuntu_packages[@]}")
-elif [ $distro = "fedora" ]; then
-    packages=("${packages[@]}" "${fedora_packages[@]}")
-fi
+log "Installing system packages"
+mapfile -t packages < pkg/system.txt
 install_packages $distro "${packages[@]}"
 
 # install homebrew package manager
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew=/home/linuxbrew/.linuxbrew/bin/brew
 
-brew_pkgs=(
-    lazygit
-    kubectl
-    k9s
-)
-$brew install @packages
+log "Installing brew packages"
+mapfile -t brew_pkgs < pkg/brew.txt
+$brew install @brew_pkgs
 
+log "Installing nvim packages"
+mapfile -t nvim_pkgs < pkg/nvim.txt
+$brew install @nvim_pkgs
 
 log "stow dotfiles"
 stow --adopt .

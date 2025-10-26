@@ -3,6 +3,9 @@ return {
         "nvim-treesitter/nvim-treesitter",
         event = "BufEnter",
         build = ":TSUpdate",
+        opts = {
+            auto_install = true,
+        }
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
