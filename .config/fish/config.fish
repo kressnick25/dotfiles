@@ -23,6 +23,8 @@ set -Ux MANPAGER 'nvim +Man!'
 set -Ux RUSTUP_HOME ~/.config/rustup
 set -Ux CARGO_HOME ~/.config/cargo
 set -Ux KUBE_EDITOR nvim
+set -Ux TERM xterm-256color
+set -Ux HOMEBREW_NO_AUTO_UPDATE 1
 
 alias cat bat
 alias e nvim
