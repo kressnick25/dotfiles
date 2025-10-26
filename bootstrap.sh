@@ -3,7 +3,7 @@
 ### Nicholas Kress terminal setup
 # assumes fedora distro
 
-set -e
+set -ex
 
 function log {
     GREEN="\033[0;32m"
@@ -40,17 +40,25 @@ log "Installing system packages"
 mapfile -t packages < pkg/system.txt
 install_packages $distro "${packages[@]}"
 
-# install homebrew package manager
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew=/home/linuxbrew/.linuxbrew/bin/brew
+export HOMEBREW_NO_AUTO_UPDATE=1
+# install homebrew package manager
+if [ ! -f $brew ]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
 log "Installing brew packages"
 mapfile -t brew_pkgs < pkg/brew.txt
-$brew install @brew_pkgs
+$brew install ${brew_pkgs[@]}
+
+log "Instlling nvim"
+if ! command -v nvim >/dev/null 2>&1; then
+    $brew install --HEAD neovim
+fi
 
 log "Installing nvim packages"
 mapfile -t nvim_pkgs < pkg/nvim.txt
-$brew install @nvim_pkgs
+$brew install ${nvim_pkgs[@]}
 
 log "stow dotfiles"
 stow --adopt .
@@ -79,11 +87,6 @@ if [ ! -d ~/.venv/ ]; then
 else
     log "python3 virtualenv already created"
 fi
-
-log "install language servers"
-# languge servers
-pip install pyright --break-system-packages
-go install golang.org/x/tools/gopls@latest
 
 log "setup docker-compose for podman"
 # allow docker-compose to connect to podman non-root
