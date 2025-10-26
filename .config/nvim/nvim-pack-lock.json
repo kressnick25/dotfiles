@@ -1,0 +1,87 @@
+{
+  "plugins": {
+    "alpha-nvim": {
+      "rev": "2b3cbcd",
+      "src": "https://github.com/goolord/alpha-nvim"
+    },
+    "blink.cmp": {
+      "rev": "327fff9",
+      "src": "https://github.com/saghen/blink.cmp",
+      "version": "'v1.7.0'"
+    },
+    "blink.compat": {
+      "rev": "1454f14",
+      "src": "https://github.com/saghen/blink.compat"
+    },
+    "conform.nvim": {
+      "rev": "9fd3d5e",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
+    "friendly-snippets": {
+      "rev": "572f566",
+      "src": "https://github.com/rafamadriz/friendly-snippets"
+    },
+    "fzf-lua": {
+      "rev": "49ba118",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
+    "gitsigns.nvim": {
+      "rev": "20ad441",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
+    "harpoon": {
+      "rev": "ed1f853",
+      "src": "https://github.com/ThePrimeagen/harpoon",
+      "version": "'harpoon2'"
+    },
+    "lazydev.nvim": {
+      "rev": "01bc2aa",
+      "src": "https://github.com/folke/lazydev.nvim"
+    },
+    "lualine.nvim": {
+      "rev": "3946f01",
+      "src": "https://github.com/nvim-lualine/lualine.nvim"
+    },
+    "nvim-autopairs": {
+      "rev": "7a2c97c",
+      "src": "https://github.com/windwp/nvim-autopairs"
+    },
+    "nvim-lspconfig": {
+      "rev": "a9b2fb5",
+      "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-tree.lua": {
+      "rev": "64e2192",
+      "src": "https://github.com/nvim-tree/nvim-tree.lua"
+    },
+    "nvim-treesitter": {
+      "rev": "42fc28ba",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "nvim-web-devicons": {
+      "rev": "8dcb311",
+      "src": "https://github.com/nvim-tree/nvim-web-devicons"
+    },
+    "plenary.nvim": {
+      "rev": "b9fd522",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "toggleterm.nvim": {
+      "rev": "50ea089",
+      "src": "https://github.com/akinsho/toggleterm.nvim",
+      "version": "'v2.13.1'"
+    },
+    "trouble.nvim": {
+      "rev": "76030c5",
+      "src": "https://github.com/folke/trouble.nvim"
+    },
+    "vague.nvim": {
+      "rev": "5689afd",
+      "src": "https://github.com/vague2k/vague.nvim"
+    },
+    "vim-tmux-navigator": {
+      "rev": "c45243d",
+      "src": "https://github.com/christoomey/vim-tmux-navigator"
+    }
+  }
+}
