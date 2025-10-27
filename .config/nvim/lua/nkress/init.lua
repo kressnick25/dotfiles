@@ -323,6 +323,9 @@ vim.keymap.set("n", "<C-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>")
 -- treesitter
 require("nvim-treesitter.configs").setup({
 	auto_install = true,
+    highlight = {
+      enable = true,
+    },
 })
 
 -- trouble
