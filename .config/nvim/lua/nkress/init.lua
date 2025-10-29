@@ -209,7 +209,7 @@ require("lualine").setup({
 -- defaults defined at https://github.com/neovim/nvim-lspconfig/tree/master/lsp
 -- local configs can be defined in ~/.config/nvim/lsp/
 vim.lsp.enable({
-	"basedpywright",
+	"basedpyright",
 	"gopls",
 	"lua_ls",
 	"ts_ls",
